@@ -109,7 +109,10 @@
               <span>Lock Account</span>
               <i class="mdi mdi-lock ms-1"></i>
             </a>
-            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+            <form id="logoutform" action="{{ route('logout') }}" method="POST">
+                {{ csrf_field() }}
+            </form>
+            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="javascript:$('#logoutform').submit();">
               <span>Log Out</span>
               <i class="mdi mdi-logout ms-1"></i>
             </a>

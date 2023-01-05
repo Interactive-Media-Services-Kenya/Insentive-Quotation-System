@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Nairobi',
 
     /*
     |--------------------------------------------------------------------------
@@ -214,4 +214,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
+    'admin_email'=>'info@ims.co.ke',
+    'admin_mobile'=>'[+254]-709-084-000',
+    'shop_address'=>'Valley View office Park, City Park Drive, 7th Floor Tower A',
 ];

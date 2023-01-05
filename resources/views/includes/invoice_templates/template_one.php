@@ -40,7 +40,7 @@ font-size:10px!important;
  td{
  padding:4px;
  } </style> <?php
-$OrderController=new App\Http\Controllers\OrderController;
+$OrderController=new \App\Http\Controllers\OrderController;
 
 ?><div class="container"><div class="outer_border"> <div class="row"> <div  class=" pull-left top_box   p-4"> <h 2 class="text_color1" style="font-size:30px">{{config('app.name')}}</h 2> {{$shop_address}}
    Phone : {{$admin_mobile}}

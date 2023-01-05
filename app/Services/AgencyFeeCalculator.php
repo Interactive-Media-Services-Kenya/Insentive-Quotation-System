@@ -39,5 +39,8 @@ class AgencyFeeCalculator
          return $transactionFee;
     }
 
+    public function totalAmount($transactionQuantity,$amount){
+        return $this->getTransactionFee($transactionQuantity) + $this->disbursementFeeAmount($amount);
+    }
 
 }

@@ -1,7 +1,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-    <a class="navbar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+    <a class="navbar-brand brand-logo" href="index.html"><img src="{{ asset('assets/images/logo.svg')}}" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset('assets/images/logo-mini.svg')}}" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -18,7 +18,7 @@
       </form>
     </div>
     <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item  dropdown d-none d-md-block">
+      {{-- <li class="nav-item  dropdown d-none d-md-block">
         <a class="nav-link dropdown-toggle" id="reportDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Reports </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="reportDropdown">
           <a class="dropdown-item" href="#">
@@ -69,11 +69,11 @@
             </div>
           </a>
         </div>
-      </li>
+      </li> --}}
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
           <div class="nav-profile-img">
-            <img src="assets/images/faces/face28.png" alt="image">
+            <img src="{{asset('assets/images/faces/face28.png')}}" alt="image">
           </div>
           <div class="nav-profile-text">
             <p class="mb-1 text-black">Henry Klein</p>
@@ -81,11 +81,11 @@
         </a>
         <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
           <div class="p-3 text-center bg-primary">
-            <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/images/faces/face28.png" alt="">
+            <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{asset('assets/images/faces/face28.png')}}" alt="">
           </div>
           <div class="p-2">
             <h5 class="dropdown-header text-uppercase ps-2 text-dark">User Options</h5>
-            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+            {{-- <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
               <span>Inbox</span>
               <span class="p-0">
                 <span class="badge badge-primary">3</span>
@@ -108,7 +108,7 @@
             <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
               <span>Lock Account</span>
               <i class="mdi mdi-lock ms-1"></i>
-            </a>
+            </a> --}}
             <form id="logoutform" action="{{ route('logout') }}" method="POST">
                 {{ csrf_field() }}
             </form>
@@ -119,7 +119,7 @@
           </div>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="mdi mdi-email-outline"></i>
           <span class="count-symbol bg-success"></span>
@@ -206,7 +206,7 @@
           <div class="dropdown-divider"></div>
           <h6 class="p-3 mb-0 text-center">See all notifications</h6>
         </div>
-      </li>
+      </li> --}}
     </ul>
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
       <span class="mdi mdi-menu"></span>

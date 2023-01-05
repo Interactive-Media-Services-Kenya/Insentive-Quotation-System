@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->string('company')->nullable();
-            $table->string('attention_to')->nullable();
-            $table->foreignId('client_id')->nullable()->constrained();
-            $table->double('total_amount')->nullable();
+            $table->double('tax_percentage')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('taxes');
     }
 };

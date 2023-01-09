@@ -60,7 +60,7 @@
                                 </select>
                             </div>
                             <button type="reset" class="btn btn-secondary me-2">Reset</button>
-                            <button class="btn btn-warning me-2" onclick="addMore();">Add More</button>
+                            <button class="btn btn-warning me-2" onclick="addMore();">Add To Invoice</button>
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
                         </form>
                     </div>
@@ -107,6 +107,10 @@
         $("#formItem").submit(function(event) {
             // Prevent the default form submission behavior
             event.preventDefault();
+            if(formData.length == 0){
+                alert('Kindly Add Invoice Items');
+                return false;
+            }
             var data = {
                 "company": $("#company").val(),
                 "attention_to": $("#attention_to").val(),
@@ -129,7 +133,7 @@
                 success: function(response) {
                     // Handle the response from the server
                     console.log("Form submission successful: " + response);
-                    if (response.statusCode == 200) {
+                    if (response.status == 200) {
                         alert('Order Invoice Generated Successfully');
                         var url = "{{ route('orders.index') }}";
                         $(location).attr('href',url);
@@ -142,6 +146,8 @@
                 }
             });
             $("#formItem")[0].reset();
+            formData = [];
+
         });
     </script>
 @endsection

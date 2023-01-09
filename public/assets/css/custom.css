@@ -1,0 +1,51 @@
+<style type="text/css">
+    body {
+        width: 100% !important;
+        font-size: 12px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    }
+
+    * {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    }
+
+    .container {
+        width: 700px;
+    }
+
+    .outer_border {
+        border: 1px solid #999999 !important;
+        padding: 4% !important;
+        margin-bottom: 2% !important;
+    }
+
+    .top_box {
+        width: 47%;
+        padding: 0%
+    }
+
+    .table_pad {
+        padding: 0% 2%;
+    }
+
+    .border {
+        border: 1px solid #CCCCCC !important;
+    }
+
+    .small_text {
+        font-size: 10px !important;
+    }
+
+    .bg_color1 {
+        background: #3a5082;
+        color: #fff;
+    }
+
+    .text_color1 {
+        color: #3a5082;
+    }
+
+    td {
+        padding: 4px;
+    }
+</style>

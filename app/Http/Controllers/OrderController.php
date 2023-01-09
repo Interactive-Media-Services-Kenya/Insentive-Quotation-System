@@ -7,9 +7,9 @@ use App\Models\OrderItem;
 use App\Services\AgencyFeeCalculator;
 use App\Services\TaxCalculator;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 // use App\Http\Requests\StoreOrderRequest;
 // use App\Http\Requests\UpdateOrderRequest;
-use PDF;
 
 class OrderController extends Controller
 {
@@ -25,8 +25,53 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+
+            $query = Order::withCount(['orderItems']);
+
+
+            $table = Datatables::of($query);
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('action', 'action');
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : '';
+            });
+            $table->editColumn('order_items_count', function ($row) {
+                return $row->order_items_count ? $row->order_items_count : '';
+            });
+            $table->editColumn('company', function ($row) {
+                return $row->company ? $row->company : '';
+            });
+            $table->editColumn('attention_to', function ($row) {
+                return $row->attention_to ? $row->attention_to : '';
+            });
+            $table->editColumn('total_amount', function ($row) {
+                return $row->total_amount ? number_format($row->total_amount) : 0;
+            });
+
+            $table->editColumn('action', function ($row) {
+                $view = 1;
+                $edit = 0;
+                $delete = 1;
+                $print = 1;
+                $routePart = 'orders';
+
+                return view('includes.datatablesActions', compact(
+                    'view',
+                    'edit',
+                    'delete',
+                    'print',
+                    'routePart',
+                    'row'
+                ));
+            });
+
+            $table->rawColumns(['placeholder', 'id','order_items_count','company','attention_to','action']);
+
+            return $table->make(true);
+        }
         return view('orders.index');
     }
 
@@ -57,6 +102,7 @@ class OrderController extends Controller
         ]);
        //Then Save each item into the order
        $orderFee = 0.00;
+       $subTotal = 0.00;
         foreach ($data->postData as $dataItem) {
             OrderItem::create([
                 'name'=> $dataItem->name,
@@ -67,11 +113,15 @@ class OrderController extends Controller
                 'order_id' => $order->id,
             ]);
             $orderFee += $this->agencyFeeCalculator->totalAmount($dataItem->quantity,($dataItem->quantity*$dataItem->prize));
+            $subTotal += $dataItem->quantity * $dataItem->prize;
         }
 
         //Total Amount Calculation inclusive 16% of the total for the Tax
         $order->update([
-            'total_amount' => $orderFee + $this->taxCalculator->getTax($orderFee)
+            'total_amount' => $orderFee + $this->taxCalculator->getTax($subTotal) + $subTotal,
+            'sub_total' => $subTotal + $orderFee,
+            'agency_fee' => $orderFee,
+            'tax_amount' => $this->taxCalculator->getTax($subTotal)
         ]);
 
         return response()->json([
@@ -86,9 +136,11 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -120,18 +172,18 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        if($order->orderItems()->count()>0){
+            foreach($order->orderItems() as $orderItem){
+                $orderItem->delete();
+            }
+        }
+        $order->delete();
+
+        return back()->with('success','Invoice Deleted Successfully');
     }
 
-    function download_invoice($oid)
-    {
-        $order = Order::find($oid);
-
-        $invoice_date = date('jS F Y', strtotime($order->invoice_date));
-
-        $pdf = PDF::loadView('includes.invoice_template', array('order' => $order));
-        return $pdf->download('Invoice_' . config('app.name') . '_Order_No # ' . $oid . ' Date_' . $invoice_date . '.pdf');
-    }
 }

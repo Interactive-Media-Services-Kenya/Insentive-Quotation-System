@@ -10,11 +10,11 @@ class AgencyFeeCalculator
     private $fee,$transactionFee;
 
     public function disbursementFeeAmount($amount){
-        if($amount <= 25000000)
+        if($amount <= 2500000)
         {
             $fee = 50000;
         }
-        if($amount > 25000000 || $amount <= 3999999 )
+        if($amount > 2500000 || $amount <= 3999999 )
         {
             $fee = 0.02 * $amount;
         }
@@ -30,7 +30,7 @@ class AgencyFeeCalculator
     }
 
     public function getTransactionFee($transactionQuantity){
-        if ($transactionQuantity = 10 || $transactionQuantity< 3500){
+        if ($transactionQuantity< 3500){
             $transactionFee = 50000;
         }
         if($transactionQuantity > 3500){

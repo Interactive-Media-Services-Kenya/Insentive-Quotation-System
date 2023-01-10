@@ -129,6 +129,13 @@ class OrderController extends Controller
         ],200);
 
     }
+    public function sendMail(Request $request,$orderId){
+        // Find the Order/Invoice
+
+        //Create the Invoice Attachment
+
+        // Send the Invoice Alongside Payment Information
+    }
 
     /**
      * Display the specified resource.

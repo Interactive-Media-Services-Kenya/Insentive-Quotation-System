@@ -5,40 +5,57 @@
 @endsection
 <!-- Table Section -->
 @section('content')
-<div class="card-body">
-    <div class="table-responsive">
-        <table class=" table table-bordered table-striped table-hover datatable" id="ProductTable">
-            <thead>
-                <tr>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        Company
-                    </th>
-                    <th>
-                        Attention To
-                    </th>
-                    <th>
-                        Order Items
-                    </th>
-                    <th>
-                        Total Amount
-                    </th>
-                    <th>
-                        Date Added
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
+    <div class="page-header">
+        <h3>Invoices</h3>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-12 mb-5">
+            <a href="{{route('orders.create')}}" class="btn btn-primary pull-right"><i class="fa fa-plus-sign"></i> Add Invoice</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Order Invoices</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class=" table table-bordered table-striped table-hover datatable" id="ProductTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Company
+                                    </th>
+                                    <th>
+                                        Attention To
+                                    </th>
+                                    <th>
+                                        Order Items
+                                    </th>
+                                    <th>
+                                        Total Amount
+                                    </th>
+                                    <th>
+                                        Date Added
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 <!-- Script Section  -->
@@ -111,5 +128,3 @@
         });
     </script>
 @endsection
-
-

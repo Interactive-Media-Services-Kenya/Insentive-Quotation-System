@@ -82,7 +82,8 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="{{ route('order.sendmail', [$order->id]) }}" method="post">
+                            <form action="{{ route('orders.sendmail', [$order->id]) }}" method="post">
+                                @csrf
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="email">Email Address</label>

@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 // use App\Http\Requests\StoreOrderRequest;
 // use App\Http\Requests\UpdateOrderRequest;
-
+use PDF;
+use App\Mail\SendInvoice;
+use Mail;
 class OrderController extends Controller
 {
     public $agencyFeeCalculator,$taxCalculator;
@@ -130,11 +132,18 @@ class OrderController extends Controller
 
     }
     public function sendMail(Request $request,$orderId){
-        // Find the Order/Invoice
 
-        //Create the Invoice Attachment
+        $order = Order::whereid($orderId)->with('orderItems')->first();
+        //Mail Content
+        $data["email"] = $request->email;
+        $data["title"] = "From Interactive Media Services (IMS)";
+        $data["body"] = $request->body;
+        $data["orderId"] = $orderId;
 
-        // Send the Invoice Alongside Payment Information
+        //Send Mail
+        Mail::to($data["email"])->send(new SendInvoice($data));
+
+        return back()->with('success', 'Email Sent Successfully!');
     }
 
     /**

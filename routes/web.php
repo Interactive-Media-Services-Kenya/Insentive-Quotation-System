@@ -31,6 +31,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('orders/show/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
     Route::get('orders/download-invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'downloadInvoice'])->name('orders.download-invoice');
     Route::post('orders/store', [App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
-    Route::post('orders/sendmail/{orderId}', [App\Http\Controllers\OrderController::class, 'sendMail'])->name('order.sendmail');
+    Route::post('orders/sendmail/{orderId}', [App\Http\Controllers\OrderController::class, 'sendMail'])->name('orders.sendmail');
     Route::delete('orders/delete/{id}', [App\Http\Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
 });
